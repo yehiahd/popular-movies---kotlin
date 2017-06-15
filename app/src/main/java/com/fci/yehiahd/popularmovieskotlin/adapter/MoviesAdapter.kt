@@ -31,10 +31,10 @@ class MoviesAdapter(val response: MoviesResponse) : RecyclerView.Adapter<MoviesA
         val img = view.findViewById(R.id.movie_poster_img_view) as ImageView
         fun bindMovie(movie: Movie) {
             with(movie) {
-                Picasso.with(itemView.context).load("http://image.tmdb.org/t/p/w185/${movie.posterPath}")
+                Picasso.with(itemView.context).load("http://image.tmdb.org/t/p/w185/$posterPath")
                         .resize(360, 600)
                         .into(img)
-                itemView.setOnClickListener { Toast.makeText(itemView.context, "${movie.title} is Clicked!", Toast.LENGTH_SHORT).show() }
+                itemView.setOnClickListener { Toast.makeText(itemView.context, "$title is Clicked!", Toast.LENGTH_SHORT).show() }
             }
         }
     }
