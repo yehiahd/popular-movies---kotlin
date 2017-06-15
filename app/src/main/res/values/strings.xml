@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Popular Movies Kotlin Demo</string>
+    <string name="api_key">a1192a18018e43a1fbd6a3cc003d0eac</string>
+</resources>
