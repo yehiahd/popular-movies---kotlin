@@ -8,6 +8,7 @@ import com.fci.yehiahd.popularmovieskotlin.R
 import com.fci.yehiahd.popularmovieskotlin.adapter.MoviesAdapter
 import com.fci.yehiahd.popularmovieskotlin.api.Request
 import org.jetbrains.anko.async
+import org.jetbrains.anko.longToast
 import org.jetbrains.anko.uiThread
 
 class MainActivity : AppCompatActivity() {
@@ -24,7 +25,9 @@ class MainActivity : AppCompatActivity() {
     private fun getMoviesJsonStr() {
         async {
             val moviesResponse = Request().run()
-            uiThread { moviesRecycler!!.adapter = MoviesAdapter(moviesResponse) }
+            uiThread {
+                moviesRecycler!!.adapter = MoviesAdapter(moviesResponse) { longToast(it.title) }
+            }
         }
     }
 }

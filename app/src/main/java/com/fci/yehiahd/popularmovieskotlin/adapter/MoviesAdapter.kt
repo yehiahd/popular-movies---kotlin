@@ -5,36 +5,42 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.Toast
 import com.fci.yehiahd.popularmovieskotlin.R
 import com.fci.yehiahd.popularmovieskotlin.model.Movie
 import com.fci.yehiahd.popularmovieskotlin.model.MoviesResponse
 import com.squareup.picasso.Picasso
+import org.jetbrains.anko.find
 
 /**
  * Created by yehia on 15/06/17.
  */
-class MoviesAdapter(val response: MoviesResponse) : RecyclerView.Adapter<MoviesAdapter.MoviesHolder>() {
+class MoviesAdapter(val response: MoviesResponse, val itemClick: (Movie) -> Unit) : RecyclerView.Adapter<MoviesAdapter.MoviesHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_movie, parent, false)
-        return MoviesHolder(view)
+        return MoviesHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_movie, parent, false), itemClick)
     }
 
     override fun onBindViewHolder(holder: MoviesHolder, position: Int) {
-        holder.bindMovie(response.list[position])
+        holder.bind(response[position])
     }
 
-    override fun getItemCount(): Int = response.list.size
+    override fun getItemCount(): Int = response.size()
 
-    class MoviesHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val img = view.findViewById(R.id.movie_poster_img_view) as ImageView
-        fun bindMovie(movie: Movie) {
+    class MoviesHolder(view: View, val itemClick: (Movie) -> Unit) : RecyclerView.ViewHolder(view) {
+
+        val img: ImageView
+
+        init {
+            img = view.find(R.id.movie_poster_img_view)
+        }
+
+        fun bind(movie: Movie) {
             with(movie) {
                 Picasso.with(itemView.context).load("http://image.tmdb.org/t/p/w185/$posterPath")
                         .resize(360, 600)
                         .into(img)
-                itemView.setOnClickListener { Toast.makeText(itemView.context, "$title is Clicked!", Toast.LENGTH_SHORT).show() }
+
+                itemView.setOnClickListener { itemClick(this) }
             }
         }
     }
