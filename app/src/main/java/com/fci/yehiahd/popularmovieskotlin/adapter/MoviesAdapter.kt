@@ -28,11 +28,7 @@ class MoviesAdapter(val response: MoviesResponse, val itemClick: (Movie) -> Unit
 
     class MoviesHolder(view: View, val itemClick: (Movie) -> Unit) : RecyclerView.ViewHolder(view) {
 
-        val img: ImageView
-
-        init {
-            img = view.find(R.id.movie_poster_img_view)
-        }
+        val img: ImageView = view.find(R.id.movie_poster_img_view)
 
         fun bind(movie: Movie) {
             with(movie) {

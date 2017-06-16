@@ -9,7 +9,7 @@ import java.net.URL
  */
 class Request {
 
-    companion object {
+    private companion object {
         private val API_KEY = "a1192a18018e43a1fbd6a3cc003d0eac"
         private val BASE_URL = "http://api.themoviedb.org/3/movie/top_rated?api_key"
         private val COMPLETE_URL = "$BASE_URL=$API_KEY"
