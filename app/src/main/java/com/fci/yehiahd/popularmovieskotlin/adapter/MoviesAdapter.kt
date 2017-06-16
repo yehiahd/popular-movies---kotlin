@@ -4,12 +4,11 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import com.fci.yehiahd.popularmovieskotlin.R
 import com.fci.yehiahd.popularmovieskotlin.model.Movie
 import com.fci.yehiahd.popularmovieskotlin.model.MoviesResponse
 import com.squareup.picasso.Picasso
-import org.jetbrains.anko.find
+import kotlinx.android.synthetic.main.item_movie.view.*
 
 /**
  * Created by yehia on 15/06/17.
@@ -28,13 +27,12 @@ class MoviesAdapter(val response: MoviesResponse, val itemClick: (Movie) -> Unit
 
     class MoviesHolder(view: View, val itemClick: (Movie) -> Unit) : RecyclerView.ViewHolder(view) {
 
-        val img: ImageView = view.find(R.id.movie_poster_img_view)
 
         fun bind(movie: Movie) {
             with(movie) {
                 Picasso.with(itemView.context).load("http://image.tmdb.org/t/p/w185/$posterPath")
                         .resize(360, 600)
-                        .into(img)
+                        .into(itemView.moviePosterImg)
 
                 itemView.setOnClickListener { itemClick(this) }
             }
